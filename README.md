@@ -47,6 +47,8 @@ Campaigns are defined in the `campaigns.json` file, it is in this file that the 
 ## Server Configuration
 Application parameters are set in the `.env` file.
 
+> leave `WEB_ADMIN_IP` empty to disable IP based ACL
+
 ### Sample config
 ```json
 WEB_LISTEN_ON="0.0.0.0"

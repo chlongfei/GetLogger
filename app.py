@@ -17,7 +17,7 @@ THIS PROGRAM IS PROVIDED AS-IS WITHOUT WARRANTIES AND/OR SUPPORT.
 
 import os, json, datetime, sys
 from dotenv import load_dotenv
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
@@ -32,7 +32,8 @@ authUsers = {
 @auth.verify_password
 def authenticate(uname, passwd):
     try:
-        assert (request.remote_addr == os.getenv("WEB_ADMIN_IP"))
+        if (len(os.getenv("WEB_ADMIN_IP"))):
+            assert (request.remote_addr == os.getenv("WEB_ADMIN_IP"))
         assert (os.getenv("WEB_ADMIN_USR") == uname)
         assert (os.getenv("WEB_ADMIN_PWD") == passwd)
         return os.getenv("WEB_ADMIN_USR")
