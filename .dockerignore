@@ -1,0 +1,6 @@
+# git files
+.gitignore
+
+# docker files
+Dockerfile
+compose.yaml
