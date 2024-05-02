@@ -17,13 +17,11 @@ body {
 footer {
     display: inline-flex;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
 
     background-color: var(--gl-secondary);
     color: white;
 
+    margin-top: 20px;
     padding: 5px 10px;
     font-size: small;
 }
