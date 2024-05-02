@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GetLogger Config | Campaigns</title>
+        <link rel="stylesheet" href="/static/global.css"/>
+        <script src="/static/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: '#configEditor',
+                license_key: 'gpl',
+                menubar: false
+            });
+
+            /**
+             * Get edited campaign file from TinyMCE editor, validate JSON format
+             * then send to server updating configuration.
+             */
+            function sendConfig(){
+                tinymce.triggerSave();
+                let ta = tinymce.get("configEditor").getContent({ format: "text" });
+                // vaildate json
+                try{
+                    JSON.parse(ta);
+
+                    let xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", "/config/campaign/set")
+                    xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    xhttp.send(ta);
+                    setTimeout( () => {
+                            window.location.replace("/service-check");
+                        },
+                        1000)
+                    
+                }catch (e) {
+                    alert("Invalid JSON. Save cancelled.")
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <nav class="navbar">
+            <a class="nav-brand" onClick="window.location.href='/mailbox'">
+                GetLogger
+            </a>
+            <span>
+                Configuration
+            </span>
+        </nav>
+        <div id="campaigns" class="container">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="background-color: red; color: white; padding: 5px 0; text-align: center;" colspan="2">
+                        Updating the campaign file requires service restart which may result in missed messages.
+                    </td>
+                </tr>
+                <tr style="font-size: larger;">
+                    <td>
+                        Edit Campaign File
+                    </td>
+                    <td style="text-align: end;">
+                        <button style="padding: 5px 10px;" title="view unpretty" onclick="sendConfig()">Save & Restart Service</button>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <textarea id="configEditor">
+                    {{ conf }}
+                </textarea>
+            </div>
+        </div>
+        <footer>
+            <div>
+                <a href="https://github.com/chlongfei/GetLogger">View on GitHub</a>
+            </div>
+            <div>
+                v1.0
+            </div>
+            <div>
+                &copy; <a href="https://chlf.dev">CHLF.dev</a> 2024
+            </div>
+        </footer>
+    </body>
+</html>

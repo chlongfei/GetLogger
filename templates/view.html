@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GetLogger - {{ campaignName }}</title>
+        <link rel="stylesheet" href="/static/global.css"/>
+        <link rel="stylesheet" href="/static/view.css"/>
+    </head>
+    <body>
+        <nav class="navbar">
+            <a class="nav-brand" onClick="window.location.href='/mailbox'">
+                GetLogger
+            </a>
+            <div>
+                {{ campaignName }}
+            </div>
+        </nav>
+        <div id="campaigns" class="container">
+            <table>
+                <tr style="font-size: larger;">
+                    <td>
+                        Messages from <span style="font-weight: bold; color:var(--gl-primary)"> {{ campaignName }} </span>
+                    </td>
+                    <td style="text-align: end;">
+                        <button style="padding: 5px 10px;" title="view unpretty" onclick="getCSV('{{ campaignName }}')">View Raw</button>
+                    </td>
+                </tr>
+            </table>
+            <table id="msg-tbl">
+                <thead>
+                    <tr>
+                        <th>
+                            Timestamp
+                        </th>
+                        <th>
+                            From
+                        </th>
+                        <th>
+                            Body
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for msg in messages %}
+                <tr>
+                    <td>
+                        {{msg[0]}}
+                    </td>
+                    <td>
+                        {{msg[1]}}
+                    </td>
+                    <td>
+                        {{msg[2]}}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function getCSV(campaignName){
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200){
+                        let file = new Blob([this.responseText], {type:"text/csv"})
+                        let oilnk = document.createElement("a");
+                        oilnk.href = URL.createObjectURL(file);
+                        oilnk.download = "{{campaignName}}";
+                        oilnk.click();
+                        URL.revokeObjectURL(link);
+                    }
+                }
+                xhttp.open("GET", "/mailbox/get/raw/{{ campaignName }}");
+                xhttp.send();
+            }
+        </script>
+        <footer>
+            <div>
+                <a href="https://github.com/chlongfei/GetLogger">View on GitHub</a>
+            </div>
+            <div>
+                v1.0
+            </div>
+            <div>
+                &copy; <a href="https://chlf.dev">CHLF.dev</a> 2024
+            </div>
+        </footer>
+    </body>
+</html>

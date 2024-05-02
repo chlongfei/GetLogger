@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GetLogger</title>
+        <link rel="stylesheet" href="/static/global.css"/>
+        <style>
+            .loader {
+                width: 48px;
+                height: 48px;
+                border: 5px solid #FFF;
+                border-bottom-color: var(--gl-primary);
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+                }
+
+                @keyframes rotation {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+                } 
+        </style>
+
+        <script>
+            function checkAlive(){
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4 && xhr.status === 200){
+                        window.location.href='/mailbox';
+                    }
+                }
+                xhr.ontimeout = () => {
+                    console.error("Alive check timed out! Server offline. :(");
+                }
+                xhr.open('GET', '/');
+                xhr.send();
+            }
+        </script>
+    </head>
+    <body  onload="checkAlive()">
+        <nav class="navbar">
+            <a class="nav-brand" onClick="window.location.href='/mailbox'">
+                GetLogger
+            </a>
+        </nav>
+        <div id="campaigns" class="container">
+            <h2>Waiting for server to reboot....</h2>
+            <div>
+                <span class="loader"></span>
+            </div>
+        </div>
+        <footer>
+            <div>
+                <a href="https://github.com/chlongfei/GetLogger">View on GitHub</a>
+            </div>
+            <div>
+                v1.0
+            </div>
+            <div>
+                &copy; <a href="https://chlf.dev">CHLF.dev</a> 2024
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    border-spacing: 10px;
+}
+
+.tbl-row-btn {
+    border: solid thin var(--gl-primary);
+    border-radius: 5px;
+    box-shadow: 2px 3px 5px grey;
+    padding: 5px;
+    user-select: none;
+}
+
+.tbl-row-btn:hover {
+    background-color: var(--gl-light);
+    color: white;
+}
+.tbl-row-btn:active {
+    background-color: var(--gl-primary);
+    color: white;
+    box-shadow: none;
+}

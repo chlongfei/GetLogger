@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GetLogger - Dashboard</title>
+        <link rel="stylesheet" href="/static/global.css"/>
+        <link rel="stylesheet" href="/static/mb.css"/>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-brand">
+                GetLogger
+            </div>
+        </nav>
+        <div id="campaigns" class="container">
+            <table style="width: 100%;">
+                <tr style="font-size: larger;">
+                    <td>
+                        Campaigns
+                    </td>
+                    <td style="text-align: end;">
+                        <button style="padding: 5px 10px;" title="view unpretty" onclick="window.location.href='/config/campaign'">Edit Campaigns</button>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tbody>
+                    {% for mailbox in mailboxes %}
+                    <tr>
+                        <td class="tbl-row-btn" onClick="window.location.href='mailbox/get/{{mailbox}}'">
+                            {{ mailbox }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            <div>
+                <a href="https://github.com/chlongfei/GetLogger">View on GitHub</a>
+            </div>
+            <div>
+                v1.0
+            </div>
+            <div>
+                &copy; <a href="https://chlf.dev">CHLF.dev</a> 2024
+            </div>
+        </footer>
+    </body>
+</html>

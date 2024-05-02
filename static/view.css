@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+
+#msg-tbl th{
+    background-color: var(--gl-primary);
+    color:white;
+}
+
+#msg-tbl td {
+    text-align: center;
+}
+
+#msg-tbl tr:nth-child(odd) {
+    background-color: lightgrey;
+}

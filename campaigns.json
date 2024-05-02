@@ -1,6 +1,1 @@
-{
-    "campaign1": {
-            "key":"abcd12345",
-            "active":true
-        }   
-}
+{"campaign1": {"key": "abcd54321", "active": true}, "campaign2": {"key": "abcd12345", "active": true}, "campaign3": {"key": "abcd12345", "active": true}, "campaign4": {"key": "abcd12345", "active": true}, "campaign5": {"key": "abcd12345", "active": true}, "campaign6": {"key": "abcd12345", "active": true}}
