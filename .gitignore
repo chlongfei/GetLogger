@@ -163,3 +163,5 @@ cython_debug/
 ## additional ignores
 .devcontainer/
 .github/
+
+datastore/
